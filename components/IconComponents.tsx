@@ -51,3 +51,19 @@ export const SunIcon: React.FC<{ className?: string }> = ({ className }) => (
 export const PlusCircleIcon: React.FC<{ className?: string }> = ({ className }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
 );
+
+export const PiggyBankIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M10 2c-1.5 0-2.5 1-3 2.5s-1.5 2-1.5 4.5c0 2 1 3.5 2.5 4.5.5.5 1 1 1.5 1.5H6v2h1.5c1.5 0 2.5-1 3-2.5s1.5-2 1.5-4.5c0-2-1-3.5-2.5-4.5C8.5 3 8 2.5 7.5 2H10m-3.5 6H8m1.5-2H11m1 9.5c-1.5 0-2.5-1-3-2.5s-1.5-2-1.5-4.5c0-2 1-3.5 2.5-4.5.5-.5 1-1 1.5-1.5H12v-2h-.5c-1.5 0-2.5 1-3 2.5s-1.5 2-1.5 4.5c0 2 1 3.5 2.5 4.5.5.5 1 1 1.5 1.5H18v2h-6.5Z"></path><path d="M16 7.5c0 2.5 2 4.5 4.5 4.5H22v-2h-1.5C18 10 16 8 16 5.5V4h-2v1.5c0 2 1.5 3 2.5 3.5.5.5 1 1 1.5 1.5"></path><path d="M5.5 12.5c1.5 0 2.5 1 3 2.5s1.5 2 1.5 4.5c0 2-1 3.5-2.5 4.5C6.5 23 6 22.5 5.5 22H4v-2h1.5c1.5 0 2.5-1 3-2.5s1.5-2 1.5-4.5c0-2-1-3.5-2.5-4.5C6.5 11 6 11.5 5.5 12H2v2h3.5Z"></path></svg>
+);
+
+export const WalletIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M20 12V8H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4Z"></path><path d="M4 6v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V12"></path><path d="M18 12a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1Z"></path></svg>
+);
+
+export const TrophyIcon: React.FC<{ className?: string }> = ({ className }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21-.19.08-.44.15-.73.23-.29.08-.6.16-.9.25A4.6 4.6 0 0 1 6 21c-2.21 0-4-1.79-4-4v-1.5"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21.19.08.44.15.73.23.29.08.6.16.9.25A4.6 4.6 0 0 0 18 21c2.21 0 4-1.79 4-4v-1.5"></path><path d="M8 12a2 2 0 0 0-2-2H4v4h2a2 2 0 0 0 2-2Z"></path><path d="M16 12a2 2 0 0 1 2-2h2v4h-2a2 2 0 0 1-2-2Z"></path><path d="M12 2v4"></path><path d="M12 12a4 4 0 0 1-4-4h8a4 4 0 0 1-4 4Z"></path></svg>
+);
+
+export const XIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+);
