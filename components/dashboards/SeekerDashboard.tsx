@@ -1,115 +1,116 @@
 import React from 'react';
-import { BriefcaseIcon, DollarSignIcon, TargetIcon, UserIcon, TrophyIcon, CertificateIcon } from '../IconComponents';
+import { BriefcaseIcon, DollarSignIcon, TargetIcon, UsersIcon } from '../IconComponents';
 
-const StatCard: React.FC<{ icon: React.ReactNode; title: string; value: string; color: string }> = ({ icon, title, value, color }) => (
-  <div className={`p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200 dark:border-gray-700`}>
-    <div className="flex items-start justify-between">
-      <div>
-        <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{title}</p>
-        <p className="text-2xl font-bold text-gray-900 dark:text-white">{value}</p>
-      </div>
-      <div className={`p-3 rounded-full ${color}`}>
-        {icon}
+const CircularProgress: React.FC<{ progress: number; size?: number; strokeWidth?: number; }> = ({ progress, size = 120, strokeWidth = 10 }) => {
+  const radius = (size - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (progress / 100) * circumference;
+
+  return (
+    <div className="relative" style={{ width: size, height: size }}>
+      <svg className="w-full h-full" viewBox={`0 0 ${size} ${size}`}>
+        <circle
+          className="text-gray-200 dark:text-gray-700"
+          stroke="currentColor"
+          strokeWidth={strokeWidth}
+          fill="transparent"
+          r={radius}
+          cx={size / 2}
+          cy={size / 2}
+        />
+        <circle
+          className="text-brand-green"
+          stroke="url(#progressGradient)"
+          strokeWidth={strokeWidth}
+          strokeLinecap="round"
+          fill="transparent"
+          r={radius}
+          cx={size / 2}
+          cy={size / 2}
+          style={{ strokeDasharray: circumference, strokeDashoffset: offset, transition: 'stroke-dashoffset 0.5s ease-out' }}
+          transform={`rotate(-90 ${size/2} ${size/2})`}
+        />
+        <defs>
+            <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#009E49" />
+                <stop offset="100%" stopColor="#FCD116" />
+            </linearGradient>
+        </defs>
+      </svg>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <span className="text-2xl font-bold text-gray-900 dark:text-white">{progress}%</span>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
-const JobListItem: React.FC<{ title: string; company: string; location: string }> = ({ title, company, location }) => (
-  <div className="p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors duration-200 flex items-center justify-between">
+const JobCard: React.FC<{title: string; company: string;}> = ({ title, company }) => (
+  <div className="p-4 rounded-xl bg-gray-100 dark:bg-gray-700/50 flex justify-between items-center">
     <div>
       <h4 className="font-bold text-gray-900 dark:text-white">{title}</h4>
-      <p className="text-sm text-gray-500 dark:text-gray-400">{company} - {location}</p>
+      <p className="text-sm text-gray-500 dark:text-gray-400">{company}</p>
     </div>
-    <button className="px-3 py-1 text-xs font-semibold text-white bg-brand-blue rounded-full hover:bg-blue-700">Apply</button>
+    <button className="px-4 py-2 text-sm font-semibold text-white bg-brand-blue rounded-lg hover:bg-blue-700 transition-colors">
+      View
+    </button>
   </div>
 );
 
-const ProgressBar: React.FC<{ progress: number }> = ({ progress }) => (
-    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-        <div className="bg-gradient-to-r from-brand-green to-brand-yellow h-2.5 rounded-full" style={{ width: `${progress}%` }}></div>
+const IkiminaCard: React.FC<{name: string, members: number, goal: string}> = ({name, members, goal}) => (
+    <div className="p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white/30 dark:bg-gray-800/30">
+        <h4 className="font-bold text-gray-900 dark:text-white">{name}</h4>
+        <div className="text-sm text-gray-500 dark:text-gray-400 flex items-center space-x-4 mt-2">
+            <span><UsersIcon className="w-4 h-4 inline mr-1"/> {members} members</span>
+            <span><DollarSignIcon className="w-4 h-4 inline mr-1"/> {goal}</span>
+        </div>
+        <button className="mt-4 w-full py-2 font-semibold text-white bg-gradient-to-r from-brand-green to-yellow-400 rounded-lg hover:opacity-90 transition-opacity">
+            Request to Join
+        </button>
     </div>
 );
 
-const LeaderboardItem: React.FC<{rank: number; name: string; points: number}> = ({rank, name, points}) => (
-    <div className="flex items-center justify-between text-sm">
-        <div className="flex items-center space-x-2">
-            <span className="font-bold w-5">{rank}.</span>
-            <span>{name}</span>
-        </div>
-        <span className="font-semibold text-brand-green">{points} pts</span>
-    </div>
-);
 
 export const SeekerDashboard: React.FC = () => {
   return (
     <div className="space-y-8">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <StatCard icon={<BriefcaseIcon className="w-6 h-6 text-white"/>} title="Jobs Applied" value="12" color="bg-brand-blue" />
-        <StatCard icon={<UserIcon className="w-6 h-6 text-white"/>} title="Profile Views" value="48" color="bg-brand-green" />
-        <StatCard icon={<DollarSignIcon className="w-6 h-6 text-black"/>} title="Savings" value="RWF 50,000" color="bg-brand-yellow" />
-      </div>
-
-      <div className="relative">
-        <input 
-          type="text" 
-          placeholder="AI Powered Job Search (e.g., 'marketing jobs in Kigali')" 
-          className="w-full p-4 pl-12 text-lg rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 backdrop-blur-md focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none transition"
-        />
-        <BriefcaseIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400" />
-      </div>
-
       <div className="grid lg:grid-cols-3 gap-8">
+        
         <div className="lg:col-span-2 space-y-8">
             <div className="p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200 dark:border-gray-700">
               <h3 className="text-xl font-bold font-display text-gray-900 dark:text-white mb-4">Recommended Jobs</h3>
-              <div className="space-y-2">
-                <JobListItem title="Frontend Developer" company="TechInnovate" location="Kigali" />
-                <JobListItem title="Accountant" company="Bank of Kigali" location="Kigali" />
-                <JobListItem title="Project Manager" company="GovTech Rwanda" location="Kigali" />
+              <div className="space-y-4">
+                  <JobCard title="Frontend Developer" company="Kigali Tech Hub" />
+                  <JobCard title="Accountant" company="Bank of Rwanda" />
               </div>
             </div>
             <div className="p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200 dark:border-gray-700">
-              <h3 className="text-xl font-bold font-display text-gray-900 dark:text-white mb-4">My Achievements</h3>
-               <div className="flex space-x-4">
-                    <div className="text-center p-2 bg-yellow-100 dark:bg-yellow-900/50 rounded-lg">
-                        <TrophyIcon className="w-10 h-10 mx-auto text-yellow-500"/>
-                        <p className="text-xs font-bold mt-1">Top Saver</p>
-                    </div>
-                     <div className="text-center p-2 bg-green-100 dark:bg-green-900/50 rounded-lg">
-                        <CertificateIcon className="w-10 h-10 mx-auto text-green-500"/>
-                        <p className="text-xs font-bold mt-1">Python Skilled</p>
-                    </div>
-               </div>
+              <h3 className="text-xl font-bold font-display text-gray-900 dark:text-white mb-4">Join a Savings Group (Ikimina)</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                  <IkiminaCard name="Kigali Innovators" members={8} goal="RWF 5M"/>
+                  <IkiminaCard name="Musanze Artisans" members={12} goal="RWF 2M"/>
+              </div>
             </div>
         </div>
         
         <div className="space-y-8">
-            <div className="p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200 dark:border-gray-700 space-y-4">
+            <div className="p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center">
               <h3 className="text-xl font-bold font-display text-gray-900 dark:text-white">Savings Goal</h3>
-              <div>
-                <div className="flex justify-between text-sm font-medium text-gray-600 dark:text-gray-300">
-                  <span>Laptop Fund</span>
-                  <span>75%</span>
-                </div>
-                <ProgressBar progress={75} />
-                <p className="text-xs text-right mt-1 text-gray-500">RWF 750,000 / RWF 1,000,000</p>
-              </div>
-               <button className="w-full py-2 font-semibold text-white bg-gradient-to-r from-brand-blue to-brand-green rounded-lg">
-                Quick Save / Loan
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Laptop Fund</p>
+              <CircularProgress progress={75} />
+              <p className="mt-4 font-semibold text-gray-700 dark:text-gray-300">RWF 750,000 / RWF 1,000,000</p>
+            </div>
+             <div className="p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200 dark:border-gray-700">
+              <h3 className="text-xl font-bold font-display text-gray-900 dark:text-white mb-4">Training Hub</h3>
+               <div className="h-32 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center text-center p-4">
+                    <p className="font-semibold text-gray-600 dark:text-gray-300">Ready to learn a new skill?</p>
+               </div>
+              <button className="mt-4 w-full py-3 font-semibold text-white bg-gradient-to-r from-brand-blue to-brand-green rounded-lg flex items-center justify-center space-x-2">
+                <TargetIcon className="w-5 h-5"/>
+                <span>Browse Courses</span>
               </button>
             </div>
-
-            <div className="p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200 dark:border-gray-700">
-                <h3 className="text-xl font-bold font-display text-gray-900 dark:text-white mb-4">Community Leaderboard</h3>
-                <div className="space-y-3">
-                    <LeaderboardItem rank={1} name="Aline U." points={1250} />
-                    <LeaderboardItem rank={2} name="Jean B." points={1100} />
-                    <LeaderboardItem rank={3} name="You" points={980} />
-                    <LeaderboardItem rank={4} name="Grace I." points={950} />
-                </div>
-            </div>
         </div>
+
       </div>
     </div>
   );

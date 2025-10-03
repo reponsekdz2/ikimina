@@ -1,96 +1,89 @@
-
 import React from 'react';
-import { BriefcaseIcon, UsersIcon, UserIcon } from '../IconComponents';
+import { BriefcaseIcon, UsersIcon, UserIcon, PlusCircleIcon, DollarSignIcon } from '../IconComponents';
+
+const ProgressBar: React.FC<{ progress: number }> = ({ progress }) => (
+    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+        <div className="bg-gradient-to-r from-brand-green to-brand-yellow h-2.5 rounded-full" style={{ width: `${progress}%` }}></div>
+    </div>
+);
+
+const IkiminaManagementCard: React.FC<{name: string, members: number, goal: string, progress: number}> = ({name, members, goal, progress}) => (
+    <div className="p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200 dark:border-gray-700 flex flex-col">
+        <h4 className="font-bold text-xl text-gray-900 dark:text-white">{name}</h4>
+        <div className="text-sm text-gray-500 dark:text-gray-400 flex items-center space-x-4 mt-2">
+            <span><UsersIcon className="w-4 h-4 inline mr-1"/> {members} members</span>
+            <span><DollarSignIcon className="w-4 h-4 inline mr-1"/> {goal} Target</span>
+        </div>
+        <div className="mt-4">
+            <div className="flex justify-between text-sm font-medium text-gray-600 dark:text-gray-300">
+                <span>Contribution Progress</span>
+                <span>{progress}%</span>
+            </div>
+            <ProgressBar progress={progress} />
+        </div>
+        <div className="mt-auto pt-4 flex space-x-2">
+             <button className="w-full py-2 font-semibold text-white bg-brand-blue rounded-lg">
+                Manage
+            </button>
+             <button className="p-2 font-semibold text-gray-600 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 rounded-lg">
+                <PlusCircleIcon className="w-5 h-5"/>
+            </button>
+        </div>
+    </div>
+);
 
 export const EmployerDashboard: React.FC = () => {
-    const candidates = [
-        { name: 'Aline Uwase', role: 'Frontend Developer', status: 'Interviewing' },
-        { name: 'Jean Bosco', role: 'Project Manager', status: 'New' },
-        { name: 'Marie Claire', role: 'UI/UX Designer', status: 'Offer Sent' },
-        { name: 'Emmanuel N.', role: 'Backend Developer', status: 'Rejected' },
-    ];
-
-    const getStatusColor = (status: string) => {
-        switch (status) {
-            case 'Interviewing': return 'bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300';
-            case 'New': return 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300';
-            case 'Offer Sent': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-300';
-            case 'Rejected': return 'bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300';
-            default: return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300';
-        }
-    };
-
     return (
         <div className="space-y-8">
-            <div className="flex justify-between items-center">
-                <h2 className="text-3xl font-bold font-display text-gray-900 dark:text-white">Employer Dashboard</h2>
-                <button className="px-6 py-3 font-semibold text-white bg-gradient-to-r from-brand-blue to-brand-green rounded-lg shadow-lg hover:scale-105 transition-transform">
-                    Post a New Job
+            <div className="grid md:grid-cols-2 gap-6">
+                <button className="group p-6 rounded-2xl bg-gradient-to-br from-brand-blue to-cyan-500 text-white text-left flex items-center justify-between hover:shadow-2xl hover:shadow-cyan-500/50 transition-all duration-300">
+                    <div>
+                        <h2 className="text-2xl font-bold font-display">Post a New Job</h2>
+                        <p className="opacity-80">Find the best talent in Rwanda</p>
+                    </div>
+                    <BriefcaseIcon className="w-12 h-12 opacity-50 group-hover:scale-110 transition-transform"/>
+                </button>
+                 <button className="group p-6 rounded-2xl bg-gradient-to-br from-brand-green to-yellow-500 text-white text-left flex items-center justify-between hover:shadow-2xl hover:shadow-yellow-500/50 transition-all duration-300">
+                    <div>
+                        <h2 className="text-2xl font-bold font-display">Create a Savings Group</h2>
+                        <p className="opacity-80">Empower your community with Ikimina</p>
+                    </div>
+                    <UsersIcon className="w-12 h-12 opacity-50 group-hover:scale-110 transition-transform"/>
                 </button>
             </div>
+            
+            <div className="p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200 dark:border-gray-700">
+                <h3 className="text-2xl font-bold font-display text-gray-900 dark:text-white mb-4">My Savings Groups (Ikimina)</h3>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <IkiminaManagementCard name="Kigali Innovators" members={8} goal="RWF 5M" progress={60}/>
+                    <div className="min-h-[150px] flex items-center justify-center text-center p-6 rounded-2xl border-2 border-dashed border-gray-300 dark:border-gray-600 hover:border-brand-green hover:text-brand-green transition-colors cursor-pointer">
+                        <div>
+                            <PlusCircleIcon className="w-10 h-10 mx-auto text-gray-400"/>
+                            <p className="mt-2 font-semibold">Create a New Group</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                 <div className="p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200 dark:border-gray-700 flex items-center space-x-4">
-                    <div className="p-4 bg-brand-blue rounded-full text-white"><BriefcaseIcon className="w-8 h-8" /></div>
-                    <div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">Active Listings</p>
-                        <p className="text-3xl font-bold text-gray-900 dark:text-white">5</p>
+             <div className="p-8 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200 dark:border-gray-700">
+                <div className="grid md:grid-cols-3 gap-6 items-center">
+                    <div className="md:col-span-2">
+                        <h3 className="text-2xl font-bold font-display text-gray-900 dark:text-white">Empowerment Hub</h3>
+                        <p className="mt-2 text-gray-600 dark:text-gray-300">Support local entrepreneurs by inviting them to join your savings groups or professional network.</p>
                     </div>
-                </div>
-                 <div className="p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200 dark:border-gray-700 flex items-center space-x-4">
-                    <div className="p-4 bg-brand-green rounded-full text-white"><UsersIcon className="w-8 h-8" /></div>
-                    <div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">Total Applicants</p>
-                        <p className="text-3xl font-bold text-gray-900 dark:text-white">234</p>
-                    </div>
-                </div>
-                 <div className="p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200 dark:border-gray-700 flex items-center space-x-4">
-                    <div className="p-4 bg-brand-yellow rounded-full text-black"><UserIcon className="w-8 h-8" /></div>
-                    <div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">Hired this Month</p>
-                        <p className="text-3xl font-bold text-gray-900 dark:text-white">2</p>
+                    <div className="md:col-span-1">
+                        <button className="w-full py-4 font-semibold text-white bg-gradient-to-r from-brand-blue to-brand-green rounded-xl flex items-center justify-center space-x-2 text-lg">
+                            <PlusCircleIcon className="w-6 h-6"/>
+                            <span>Add Entrepreneur</span>
+                        </button>
                     </div>
                 </div>
             </div>
 
             <div className="p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200 dark:border-gray-700">
-                <h3 className="text-xl font-bold font-display text-gray-900 dark:text-white mb-4">Candidate Applications</h3>
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left">
-                        <thead className="border-b-2 border-gray-200 dark:border-gray-700">
-                            <tr>
-                                <th className="p-3 text-sm font-semibold text-gray-500 dark:text-gray-400">Name</th>
-                                <th className="p-3 text-sm font-semibold text-gray-500 dark:text-gray-400">Applying For</th>
-                                <th className="p-3 text-sm font-semibold text-gray-500 dark:text-gray-400">Status</th>
-                                <th className="p-3 text-sm font-semibold text-gray-500 dark:text-gray-400">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {candidates.map(candidate => (
-                                <tr key={candidate.name} className="border-b border-gray-100 dark:border-gray-700/50">
-                                    <td className="p-3 font-medium text-gray-900 dark:text-white">{candidate.name}</td>
-                                    <td className="p-3 text-gray-600 dark:text-gray-300">{candidate.role}</td>
-                                    <td className="p-3">
-                                        <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(candidate.status)}`}>
-                                            {candidate.status}
-                                        </span>
-                                    </td>
-                                    <td className="p-3">
-                                        <a href="#" className="font-medium text-brand-blue hover:underline">View Profile</a>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                <h3 className="text-xl font-bold font-display text-gray-900 dark:text-white mb-4">Active Job Listings</h3>
+                <p className="text-gray-500 dark:text-gray-400">Placeholder for job listings management.</p>
             </div>
-            
-             <div className="p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200 dark:border-gray-700">
-                <h3 className="text-xl font-bold font-display text-gray-900 dark:text-white mb-4">Recruitment Analytics</h3>
-                 <div className="h-48 flex items-center justify-center text-gray-500 dark:text-gray-400">
-                   Chart placeholder (e.g., using Recharts or D3)
-                 </div>
-             </div>
         </div>
     );
 };

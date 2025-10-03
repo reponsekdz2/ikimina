@@ -1,10 +1,7 @@
-
 import React from 'react';
 import { User, UserRole } from '../types';
 import { SeekerDashboard } from './dashboards/SeekerDashboard';
 import { EmployerDashboard } from './dashboards/EmployerDashboard';
-import { FinancialPartnerDashboard } from './dashboards/FinancialPartnerDashboard';
-import { TrainerDashboard } from './dashboards/TrainerDashboard';
 
 interface DashboardPageProps {
   user: User;
@@ -16,10 +13,6 @@ const renderDashboard = (role: UserRole) => {
       return <SeekerDashboard />;
     case UserRole.EMPLOYER:
       return <EmployerDashboard />;
-    case UserRole.FINANCIAL_PARTNER:
-      return <FinancialPartnerDashboard />;
-    case UserRole.TRAINER:
-      return <TrainerDashboard />;
     default:
       return <div>Invalid user role</div>;
   }
