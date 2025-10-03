@@ -8,7 +8,7 @@ const mockPosts: CommunityPost[] = [
 ];
 
 const PostCard: React.FC<{post: CommunityPost}> = ({post}) => (
-    <div className="p-5 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200 dark:border-gray-700">
+    <div className="p-5 rounded-2xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border border-gray-200 dark:border-gray-700 transform hover:scale-[1.02] transition-transform duration-300">
         <div className="flex items-center mb-3">
             <img src={post.avatarUrl} alt={post.author} className="w-12 h-12 rounded-full mr-4"/>
             <div>

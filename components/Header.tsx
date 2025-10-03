@@ -1,6 +1,7 @@
 import React from 'react';
 import { MoonIcon, SunIcon, FireIcon } from './IconComponents';
 import { User, Page } from '../types';
+import { RippleButton } from './common/RippleButton';
 
 interface HeaderProps {
   isAuthenticated: boolean;
@@ -38,9 +39,9 @@ export const Header: React.FC<HeaderProps> = ({ isAuthenticated, user, onNavigat
                 </div>
               </div>
             ) : (
-                 <button onClick={() => onNavigate(Page.LANDING)} className="px-5 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-brand-blue to-brand-green rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300">
-                Login / Sign Up
-              </button>
+                 <RippleButton onClick={() => onNavigate(Page.LANDING)} className="text-sm font-medium text-white bg-gradient-to-r from-brand-blue to-brand-green rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300">
+                   Login / Sign Up
+                 </RippleButton>
             )}
           </div>
         </div>

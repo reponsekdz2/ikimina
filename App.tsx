@@ -11,6 +11,10 @@ import { JobsPage } from './components/pages/JobsPage';
 import { TrainingPage } from './components/pages/TrainingPage';
 import { CommunityPage } from './components/pages/CommunityPage';
 import { ProfilePage } from './components/pages/ProfilePage';
+import { IkiminaPage } from './components/pages/IkiminaPage';
+import { WalletPage } from './components/pages/WalletPage';
+import { EntrepreneurshipPage } from './components/pages/EntrepreneurshipPage';
+
 
 const App: React.FC = () => {
   const [theme, toggleTheme] = useDarkMode();
@@ -58,9 +62,15 @@ const App: React.FC = () => {
             case Page.DASHBOARD:
                 return <DashboardOverviewPage user={user} />;
             case Page.JOBS:
-                return <JobsPage />;
+                return <JobsPage userRole={user.role} />;
+            case Page.IKIMINA:
+                return <IkiminaPage userRole={user.role} />;
+            case Page.WALLET:
+                return <WalletPage />;
             case Page.TRAINING:
                 return <TrainingPage />;
+            case Page.ENTREPRENEURSHIP:
+                return <EntrepreneurshipPage userRole={user.role} />;
             case Page.COMMUNITY:
                 return <CommunityPage />;
             case Page.PROFILE:
@@ -88,7 +98,7 @@ const App: React.FC = () => {
           theme={theme}
           toggleTheme={toggleTheme}
         />
-        <main className="pt-20">
+        <main className={!isAuthenticated ? '' : "pt-20"}>
           {renderPage()}
         </main>
         {!isAuthenticated && <Footer />}

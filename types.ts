@@ -16,7 +16,10 @@ export enum Page {
   LANDING = 'LANDING',
   DASHBOARD = 'DASHBOARD',
   JOBS = 'JOBS',
+  IKIMINA = 'IKIMINA',
+  WALLET = 'WALLET',
   TRAINING = 'TRAINING',
+  ENTREPRENEURSHIP = 'ENTREPRENEURSHIP',
   COMMUNITY = 'COMMUNITY',
   PROFILE = 'PROFILE',
 }
@@ -36,9 +39,10 @@ export interface Job {
   company: string;
   location: string;
   type: 'Full-time' | 'Part-time' | 'Contract';
-  salary: string;
+  salary: number;
   description: string;
   postedDate: string;
+  skillMatch: number;
 }
 
 export interface TrainingModule {
@@ -48,4 +52,21 @@ export interface TrainingModule {
   duration: string;
   description: string;
   isCompleted: boolean;
+  progress: number;
+}
+
+export interface IkiminaGroup {
+  id: string;
+  name: string;
+  category: 'Business' | 'Youth' | 'Personal' | 'Agriculture';
+  targetAmount: number;
+  currentAmount: number;
+  members: { name: string; avatarUrl: string }[];
+}
+
+export interface Loan {
+  id: string;
+  originalAmount: number;
+  totalRepaid: number;
+  status: 'Fully Repaid' | 'Settled';
 }

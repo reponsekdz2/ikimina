@@ -2,7 +2,7 @@ import React from 'react';
 import { BriefcaseIcon, BookOpenIcon, UsersIcon } from '../IconComponents';
 
 const StatCard: React.FC<{icon: React.ReactNode, label: string, value: string}> = ({icon, label, value}) => (
-    <div className="p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200 dark:border-gray-700 flex items-center space-x-4">
+    <div className="p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200 dark:border-gray-700 flex items-center space-x-4 transition-all duration-300 hover:scale-105 hover:shadow-lg">
         <div className="p-3 bg-brand-blue/10 dark:bg-brand-blue/20 rounded-full">
             {icon}
         </div>

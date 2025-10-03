@@ -56,3 +56,27 @@ export const XIcon: React.FC<IconProps> = (props) => (
         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
     </svg>
 );
+
+export const WalletIcon: React.FC<IconProps> = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9A2.25 2.25 0 0018.75 6.75h-1.5a3 3 0 00-3-3h-3a3 3 0 00-3 3H5.25A2.25 2.25 0 003 9v3m18 0h-2.25m-13.5 0H3m10.5 0a3 3 0 11-6 0m6 0h2.25" />
+  </svg>
+);
+
+export const LightbulbIcon: React.FC<IconProps> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-11.25a6.01 6.01 0 00-1.5-11.25M12 18v-5.25m0 0A6.01 6.01 0 0110.5 6.75a6.01 6.01 0 011.5 11.25m-1.5 0h.01M12 18h.01M12 18v.01M12 6.75v.01M12 6.75h.01M12 6.75v-.01M12 6.75H11.99M12 18H11.99M12 3.75v.01M12 3.75h.01M12 3.75v-.01M12 3.75H11.99m2.021 8.25a.75.75 0 01.75-.75h.01a.75.75 0 01.75.75v.01a.75.75 0 01-.75.75h-.01a.75.75 0 01-.75-.75v-.01zM14.021 12a.75.75 0 00-.75.75v.01a.75.75 0 00.75.75h.01a.75.75 0 00.75-.75v-.01a.75.75 0 00-.75-.75h-.01zM9.979 12a.75.75 0 01.75-.75h.01a.75.75 0 01.75.75v.01a.75.75 0 01-.75.75h-.01a.75.75 0 01-.75-.75v-.01zM9.979 12a.75.75 0 00-.75.75v.01a.75.75 0 00.75.75h.01a.75.75 0 00.75-.75v-.01a.75.75 0 00-.75-.75h-.01z" />
+    </svg>
+);
+
+export const CashIcon: React.FC<IconProps> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.75A.75.75 0 013 4.5h.75m0 0h.75A.75.75 0 014.5 6v.75m0 0v.75A.75.75 0 013.75 8.25h-.75m0 0h-.75A.75.75 0 012.25 7.5V6.75m0 0A.75.75 0 013 6h.75M3.75 12v.75A.75.75 0 013 13.5h-.75m0 0v-.75A.75.75 0 013 12h.75m0 0h.75a.75.75 0 01.75.75v.75m0 0A.75.75 0 013.75 15h-.75m0 0h-.75a.75.75 0 01-.75-.75v-.75m15-3.375a48.025 48.025 0 01-10.652 4.095c-.53.198-1.026.297-1.52.297-.494 0-.99-.1-1.52-.297-3.663-1.37-7.22-3.14-10.652-4.095m10.652-4.095c.53.198 1.026.297 1.52.297.494 0 .99-.1 1.52-.297 3.663-1.37 7.22-3.14 10.652-4.095m-10.652 4.095a48.025 48.025 0 00-10.652-4.095c-.53-.198-1.026-.297-1.52-.297-.494 0-.99.1-1.52-.297-3.663 1.37-7.22 3.14-10.652 4.095" />
+    </svg>
+);
+
+export const CheckCircleIcon: React.FC<IconProps> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+);

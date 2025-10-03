@@ -1,6 +1,6 @@
 import React from 'react';
 import { User, Page, UserRole } from '../types';
-import { LayoutGridIcon, BriefcaseIcon, BookOpenIcon, UsersIcon, UserIcon as ProfileIcon } from './IconComponents';
+import { LayoutGridIcon, BriefcaseIcon, BookOpenIcon, UsersIcon, UserIcon as ProfileIcon, WalletIcon, LightbulbIcon, CashIcon } from './IconComponents';
 
 interface DashboardLayoutProps {
   user: User;
@@ -21,7 +21,10 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ user, activePa
     const navItems = [
         { page: Page.DASHBOARD, label: 'Dashboard', icon: <LayoutGridIcon className="w-6 h-6"/> },
         { page: Page.JOBS, label: 'Jobs', icon: <BriefcaseIcon className="w-6 h-6"/> },
+        { page: Page.IKIMINA, label: 'Ikimina', icon: <CashIcon className="w-6 h-6"/> },
+        { page: Page.WALLET, label: 'Wallet', icon: <WalletIcon className="w-6 h-6"/> },
         { page: Page.TRAINING, label: 'Training', icon: <BookOpenIcon className="w-6 h-6"/> },
+        { page: Page.ENTREPRENEURSHIP, label: 'Entrepreneurship', icon: <LightbulbIcon className="w-6 h-6"/> },
         { page: Page.COMMUNITY, label: 'Community', icon: <UsersIcon className="w-6 h-6"/> },
         { page: Page.PROFILE, label: 'My Profile', icon: <ProfileIcon className="w-6 h-6"/> },
     ];
