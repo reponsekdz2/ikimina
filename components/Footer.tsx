@@ -1,11 +1,6 @@
 import React from 'react';
-import { Page } from '../types';
 
-interface FooterProps {
-    onNavigate: (page: Page) => void;
-}
-
-export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+export const Footer: React.FC = () => {
   return (
     <footer className="bg-gray-50 dark:bg-gray-900/50 border-t border-gray-200 dark:border-gray-800">
       <div className="container mx-auto py-8 px-4 sm:px-6 lg:px-8">

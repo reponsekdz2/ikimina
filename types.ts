@@ -10,8 +10,11 @@ export interface User {
 
 export enum Page {
   LANDING,
-  AUTH,
   DASHBOARD,
+  JOBS,
+  TRAINING,
+  COMMUNITY,
+  PROFILE,
 }
 
 export enum IkiminaCategory {
@@ -35,4 +38,64 @@ export interface Ikimina {
     progress: number;
     members: Member[];
     frequency: 'weekly' | 'monthly';
+}
+
+export interface Job {
+    id: number;
+    title: string;
+    company: string;
+    salary: string;
+    deadline: string;
+    bookmarked: boolean;
+}
+
+export interface Course {
+    id: number;
+    title: string;
+    instructor: string;
+    duration: string;
+    imageUrl: string;
+}
+
+export interface CommunityPost {
+    id: number;
+    author: string;
+    avatarUrl: string;
+    content: string;
+    likes: number;
+    comments: number;
+}
+
+export interface Badge {
+    id: number;
+    name: string;
+    description: string;
+    unlocked: boolean;
+    icon: React.ReactElement;
+}
+
+// CV Builder Types
+export interface WorkExperience {
+    id: string;
+    jobTitle: string;
+    company: string;
+    years: string;
+    description: string;
+}
+
+export interface Education {
+    id: string;
+    degree: string;
+    institution: string;
+    year: string;
+}
+
+export interface Skill {
+    id: string;
+    name: string;
+}
+
+export type CVSection = {
+    id: 'workExperience' | 'education' | 'skills' | 'portfolio';
+    title: string;
 }

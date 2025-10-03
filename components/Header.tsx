@@ -1,5 +1,5 @@
 import React from 'react';
-import { MoonIcon, SunIcon } from './IconComponents';
+import { MoonIcon, SunIcon, FireIcon } from './IconComponents';
 import { User, Page } from '../types';
 
 interface HeaderProps {
@@ -28,13 +28,17 @@ export const Header: React.FC<HeaderProps> = ({ isAuthenticated, user, onNavigat
             
             {isAuthenticated && user ? (
               <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-2 bg-yellow-100/50 dark:bg-yellow-900/50 px-3 py-1.5 rounded-full">
+                  <FireIcon className="w-5 h-5 text-yellow-500 dark:text-brand-yellow dark:animate-pulse"/>
+                  <span className="font-bold text-sm text-yellow-700 dark:text-yellow-300">5</span>
+                </div>
                 <div className="flex items-center space-x-3">
-                    <span className="text-gray-700 dark:text-gray-200 hidden sm:block">Welcome, {user.name}</span>
+                    <span onClick={() => onNavigate(Page.PROFILE)} className="text-gray-700 dark:text-gray-200 hidden sm:block cursor-pointer hover:text-brand-blue dark:hover:text-brand-yellow transition-colors">Welcome, {user.name}</span>
                     <button onClick={onLogout} className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors">Logout</button>
                 </div>
               </div>
             ) : (
-                 <button onClick={() => onNavigate(Page.AUTH)} className="px-5 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-brand-blue to-brand-green rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300">
+                 <button onClick={() => onNavigate(Page.LANDING)} className="px-5 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-brand-blue to-brand-green rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300">
                 Login / Sign Up
               </button>
             )}

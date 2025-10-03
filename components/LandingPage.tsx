@@ -17,11 +17,12 @@ interface RoleCardProps {
 
 const RoleCard: React.FC<RoleCardProps> = ({ icon, title, description, ctaText, onClick, glowColor }) => (
   <div 
+    style={{ transformStyle: 'preserve-3d' }}
     className="group relative p-8 md:p-12 rounded-3xl bg-white/30 dark:bg-gray-800/30 backdrop-blur-2xl border border-gray-200/50 dark:border-gray-700/50 shadow-xl cursor-pointer transition-all duration-500 ease-in-out hover:shadow-2xl hover:-translate-y-2 hover:scale-105"
     onClick={onClick}
   >
     <div className={`absolute -inset-1 rounded-3xl bg-gradient-to-br from-brand-blue to-brand-green opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl ${glowColor}`}></div>
-    <div className="relative flex flex-col items-center text-center">
+    <div className="relative flex flex-col items-center text-center" style={{ transform: 'translateZ(50px)' }}>
       <div className="flex items-center justify-center w-24 h-24 rounded-full bg-white/50 dark:bg-gray-900/50 mb-6 group-hover:scale-110 transition-transform duration-300 border-2 border-white/50">
         {icon}
       </div>
@@ -37,6 +38,22 @@ const RoleCard: React.FC<RoleCardProps> = ({ icon, title, description, ctaText, 
 );
 
 export const LandingPage: React.FC<LandingPageProps> = ({ onSelectRole }) => {
+  const words = ["Jobs.", "Savings.", "Skills.", "Rwanda."];
+  const [currentWord, setCurrentWord] = React.useState(words[0]);
+  const [animationKey, setAnimationKey] = React.useState(0);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWord(prevWord => {
+        const nextIndex = (words.indexOf(prevWord) + 1) % words.length;
+        setAnimationKey(prevKey => prevKey + 1);
+        return words[nextIndex];
+      });
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center p-4 relative overflow-hidden">
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-100 via-green-100 to-yellow-100 dark:from-blue-900/30 dark:via-green-900/30 dark:to-yellow-900/30"></div>
@@ -44,7 +61,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onSelectRole }) => {
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h1 className="text-5xl md:text-7xl font-display font-extrabold text-gray-900 dark:text-white leading-tight">
-            Choose Your Path
+            Find <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-green">
+                <span key={animationKey} className="inline-block animate-fade-in-up">{currentWord}</span>
+            </span> Empower Rwanda.
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-300">
             Whether you're seeking opportunities or creating them, your journey starts here.
