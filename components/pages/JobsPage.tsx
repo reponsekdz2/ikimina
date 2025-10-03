@@ -15,7 +15,7 @@ const CircularProgressBar: React.FC<{ percentage: number }> = ({ percentage }) =
     const radius = 20;
     const circumference = 2 * Math.PI * radius;
     const offset = circumference - (percentage / 100) * circumference;
-    const color = percentage > 80 ? 'stroke-green-500' : percentage > 60 ? 'stroke-yellow-500' : 'stroke-red-500';
+    const color = percentage > 80 ? 'stroke-[#32CD32]' : percentage > 60 ? 'stroke-[#FFD700]' : 'stroke-red-500';
 
     return (
         <div className="relative flex items-center justify-center w-12 h-12">
@@ -29,11 +29,11 @@ const CircularProgressBar: React.FC<{ percentage: number }> = ({ percentage }) =
 };
 
 const JobCard: React.FC<{job: Job, onApply: (job: Job) => void}> = ({job, onApply}) => (
-    <div className="p-5 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-cyan-400/50 dark:hover:border-cyan-400/50 transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden">
-        <div className="absolute top-0 left-0 h-1.5 w-full bg-gradient-to-r from-brand-blue to-brand-green"></div>
+    <div className="p-5 rounded-2xl bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden">
+        <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-[#1E90FF] to-[#32CD32]"></div>
         <div className="flex justify-between items-start pt-2">
             <div>
-                <h3 className="text-lg font-bold text-brand-blue dark:text-brand-yellow">{job.title}</h3>
+                <h3 className="text-lg font-bold text-[#1E90FF] dark:text-[#FFD700]">{job.title}</h3>
                 <p className="font-semibold text-gray-800 dark:text-gray-200">{job.company}</p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">{job.location} • {job.type}</p>
             </div>
@@ -43,8 +43,8 @@ const JobCard: React.FC<{job: Job, onApply: (job: Job) => void}> = ({job, onAppl
             </div>
         </div>
         <div className="flex justify-between items-center mt-4">
-            <span className="text-sm font-bold text-brand-green">RWF {job.salary.toLocaleString()}</span>
-            <RippleButton onClick={() => onApply(job)} className="text-sm font-semibold text-white bg-gradient-to-r from-brand-blue to-brand-green hover:shadow-lg hover:shadow-cyan-500/50">Apply Now</RippleButton>
+            <span className="text-sm font-bold text-gray-600 dark:text-gray-400">RWF {job.salary.toLocaleString()}</span>
+            <RippleButton onClick={() => onApply(job)} className="text-sm font-semibold text-white bg-gradient-to-r from-[#1E90FF] to-[#20B2AA] hover:shadow-lg hover:shadow-teal-500/50 rounded-full">Apply Now</RippleButton>
         </div>
     </div>
 );
@@ -52,7 +52,7 @@ const JobCard: React.FC<{job: Job, onApply: (job: Job) => void}> = ({job, onAppl
 const ApplicationProgressBar: React.FC<{ progress: number }> = ({ progress }) => (
     <div className="w-full">
         <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mb-1">
-            <div className="bg-gradient-to-r from-brand-blue to-brand-green h-2.5 rounded-full transition-all duration-500 ease-in-out" style={{ width: `${progress}%` }}></div>
+            <div className="bg-gradient-to-r from-[#1E90FF] to-[#32CD32] h-2.5 rounded-full transition-all duration-500 ease-in-out" style={{ width: `${progress}%` }}></div>
         </div>
         <p className="text-xs text-right text-gray-600 dark:text-gray-400">{Math.round(progress)}% Complete</p>
     </div>
@@ -116,7 +116,7 @@ const JobApplicationModal: React.FC<{ job: Job; onClose: () => void }> = ({ job,
                                     Cover Letter
                                 </label>
                                 <textarea 
-                                    className="w-full mt-1 p-2 bg-gray-100 dark:bg-gray-700 rounded-md focus:outline-none focus:ring-2 ring-brand-blue" 
+                                    className="w-full mt-1 p-2 bg-gray-100 dark:bg-gray-700 rounded-md focus:outline-none focus:ring-2 ring-[#1E90FF]" 
                                     rows={4} 
                                     placeholder="Briefly explain why you're a good fit for this role..."
                                     value={coverLetter}
@@ -126,7 +126,7 @@ const JobApplicationModal: React.FC<{ job: Job; onClose: () => void }> = ({ job,
                         </div>
                         <RippleButton 
                             onClick={handleSubmit} 
-                            className="w-full mt-6 text-white bg-gradient-to-r from-brand-blue to-brand-green disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-cyan-500/50"
+                            className="w-full mt-6 text-white bg-gradient-to-r from-[#1E90FF] to-[#20B2AA] disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-teal-500/50 rounded-full"
                             disabled={progress < 100}
                         >
                             Submit Application
@@ -141,7 +141,7 @@ const JobApplicationModal: React.FC<{ job: Job; onClose: () => void }> = ({ job,
                         </svg>
                         <h3 className="mt-4 text-2xl font-bold font-display">Application Submitted!</h3>
                         <p className="mt-2 text-gray-600 dark:text-gray-300">Your application for {job.title} at {job.company} has been sent. Good luck!</p>
-                        <RippleButton onClick={onClose} className="w-full mt-6 text-white bg-brand-blue">Close</RippleButton>
+                        <RippleButton onClick={onClose} className="w-full mt-6 text-white bg-[#1E90FF] rounded-full">Close</RippleButton>
                     </div>
                 );
             default:
@@ -153,7 +153,7 @@ const JobApplicationModal: React.FC<{ job: Job; onClose: () => void }> = ({ job,
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex justify-center items-center z-[100] p-4 animate-fade-in-up">
             <div className="w-full max-w-lg bg-white/60 dark:bg-gray-800/60 backdrop-blur-xl rounded-3xl shadow-2xl p-8 relative" onClick={e => e.stopPropagation()}>
                  <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white transition-colors"><XIcon className="w-6 h-6"/></button>
-                 <h3 className="text-2xl font-bold font-display text-center mb-1">Apply for {job.title}</h3>
+                 <h3 className="text-3xl font-bold font-display text-center mb-1">Apply for {job.title}</h3>
                  <p className="text-center text-gray-600 dark:text-gray-400 mb-4 text-sm">at {job.company}</p>
                  {renderStep()}
             </div>
@@ -188,26 +188,26 @@ export const JobsPage: React.FC<{ userRole: UserRole }> = ({ userRole }) => {
                 <p className="text-lg text-gray-500 dark:text-gray-400">Browse jobs that match your skills and passion.</p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200 dark:border-gray-700 space-y-4">
-                <div className="grid md:grid-cols-3 gap-4">
+            <div className="p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 space-y-4">
+                <div className="grid md:grid-cols-3 gap-6">
                     <div>
-                        <label className="font-semibold">Max Salary: RWF {filters.salary.toLocaleString()}</label>
+                        <label className="font-semibold block mb-2">Max Salary: RWF {filters.salary.toLocaleString()}</label>
                         <input type="range" min="100000" max="2000000" step="50000" value={filters.salary} onChange={e => setFilters({...filters, salary: parseInt(e.target.value)})} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"/>
                     </div>
                     <div>
-                        <label className="font-semibold">Job Type</label>
-                        <div className="flex space-x-4 mt-2">
+                        <label className="font-semibold block mb-2">Job Type</label>
+                        <div className="flex space-x-4">
                             {['Full-time', 'Part-time', 'Contract'].map(type => (
                                 <label key={type} className="flex items-center space-x-2 cursor-pointer">
-                                    <input type="checkbox" checked={filters.types.includes(type)} onChange={() => handleTypeChange(type)} className="form-checkbox rounded text-brand-blue" />
+                                    <input type="checkbox" checked={filters.types.includes(type)} onChange={() => handleTypeChange(type)} className="form-checkbox rounded text-[#1E90FF] focus:ring-transparent" />
                                     <span>{type}</span>
                                 </label>
                             ))}
                         </div>
                     </div>
                     <div>
-                        <label className="font-semibold">Location</label>
-                        <input type="text" placeholder="e.g. Kigali" value={filters.location} onChange={e => setFilters({...filters, location: e.target.value})} className="w-full mt-1 p-2 rounded-md bg-gray-100 dark:bg-gray-700 border-transparent focus:ring-2 focus:ring-brand-blue"/>
+                        <label className="font-semibold block mb-1">Location</label>
+                        <input type="text" placeholder="e.g. Kigali" value={filters.location} onChange={e => setFilters({...filters, location: e.target.value})} className="w-full p-2 rounded-md bg-gray-100 dark:bg-gray-700 border-transparent focus:outline-none focus:ring-2 focus:ring-[#1E90FF]"/>
                     </div>
                 </div>
             </div>

@@ -18,7 +18,7 @@ export const Header: React.FC<HeaderProps> = ({ isAuthenticated, user, onNavigat
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex items-center">
-            <h1 onClick={() => onNavigate(isAuthenticated ? Page.DASHBOARD : Page.LANDING)} className="text-2xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-green cursor-pointer">
+            <h1 onClick={() => onNavigate(isAuthenticated ? Page.DASHBOARD : Page.LANDING)} className="text-2xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#1E90FF] to-[#32CD32] cursor-pointer">
               KaziConnect
             </h1>
           </div>
@@ -30,16 +30,16 @@ export const Header: React.FC<HeaderProps> = ({ isAuthenticated, user, onNavigat
             {isAuthenticated && user ? (
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-2 bg-yellow-100/50 dark:bg-yellow-900/50 px-3 py-1.5 rounded-full">
-                  <FireIcon className="w-5 h-5 text-yellow-500 dark:text-brand-yellow dark:animate-pulse"/>
+                  <FireIcon className="w-5 h-5 text-[#FFD700] dark:animate-pulse"/>
                   <span className="font-bold text-sm text-yellow-700 dark:text-yellow-300">5</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                    <span onClick={() => onNavigate(Page.PROFILE)} className="text-gray-700 dark:text-gray-200 hidden sm:block cursor-pointer hover:text-brand-blue dark:hover:text-brand-yellow transition-colors">Welcome, {user.name}</span>
-                    <button onClick={onLogout} className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors">Logout</button>
+                    <span onClick={() => onNavigate(Page.PROFILE)} className="text-gray-700 dark:text-gray-200 hidden sm:block cursor-pointer hover:text-[#1E90FF] dark:hover:text-[#FFD700] transition-colors">Welcome, {user.name}</span>
+                    <button onClick={onLogout} className="px-4 py-2 text-sm font-medium text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-700 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Logout</button>
                 </div>
               </div>
             ) : (
-                 <RippleButton onClick={() => onNavigate(Page.LANDING)} className="text-sm font-medium text-white bg-gradient-to-r from-brand-blue to-brand-green rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300">
+                 <RippleButton onClick={() => onNavigate(Page.LANDING)} className="text-sm font-medium text-white bg-gradient-to-r from-[#1E90FF] to-[#20B2AA] rounded-full hover:shadow-lg hover:shadow-teal-500/50 transition-all duration-300">
                    Login / Sign Up
                  </RippleButton>
             )}

@@ -89,7 +89,7 @@ const App: React.FC = () => {
 
   return (
     <div className={`${theme}`}>
-      <div className="bg-gray-50 dark:bg-gray-900/80 text-gray-900 dark:text-gray-100 min-h-screen font-sans">
+      <div className="bg-[#F5F5F5] dark:bg-gray-900 text-[#333333] dark:text-gray-200 min-h-screen font-sans">
         <Header 
           isAuthenticated={isAuthenticated}
           user={user}

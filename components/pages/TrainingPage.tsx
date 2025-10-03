@@ -10,15 +10,15 @@ const mockModules: TrainingModule[] = [
 
 const ProgressBar: React.FC<{ progress: number }> = ({ progress }) => (
     <div className="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
-        <div className="bg-brand-green h-2 rounded-full transition-all duration-500" style={{ width: `${progress}%` }}></div>
+        <div className="bg-[#32CD32] h-2 rounded-full transition-all duration-500" style={{ width: `${progress}%` }}></div>
     </div>
 );
 
 const ModuleCard: React.FC<{module: TrainingModule}> = ({module}) => (
-    <div className="p-5 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200 dark:border-gray-700 transform hover:-translate-y-1 transition-transform duration-300">
+    <div className="p-5 rounded-2xl bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 transform hover:-translate-y-1 transition-transform duration-300">
         <div className="flex justify-between items-start">
-            <h3 className="text-lg font-bold text-brand-blue dark:text-brand-yellow">{module.title}</h3>
-            <span className={`text-xs font-bold px-2 py-1 rounded-full ${module.isCompleted ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
+            <h3 className="text-lg font-bold text-[#1E90FF] dark:text-[#FFD700]">{module.title}</h3>
+            <span className={`text-xs font-bold px-3 py-1 rounded-full ${module.isCompleted ? 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300' : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-300'}`}>
                 {module.isCompleted ? 'Completed' : 'In Progress'}
             </span>
         </div>
@@ -28,7 +28,7 @@ const ModuleCard: React.FC<{module: TrainingModule}> = ({module}) => (
             <ProgressBar progress={module.progress} />
             <div className="flex justify-between items-center text-sm">
                 <span className="text-gray-500 dark:text-gray-400">{module.duration}</span>
-                <RippleButton className={`text-sm font-semibold text-white rounded-lg ${module.isCompleted ? 'bg-gray-500 cursor-not-allowed' : 'bg-gradient-to-r from-brand-green to-teal-500 hover:shadow-lg'}`}>
+                <RippleButton className={`text-sm font-semibold text-white rounded-full ${module.isCompleted ? 'bg-gray-500 cursor-not-allowed' : 'bg-gradient-to-r from-[#32CD32] to-[#20B2AA] hover:shadow-lg hover:shadow-green-500/40'}`}>
                     {module.progress > 0 && !module.isCompleted ? 'Continue Course' : module.isCompleted ? 'Review' : 'Start Course'}
                 </RippleButton>
             </div>

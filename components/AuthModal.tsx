@@ -24,7 +24,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ initialRole, onLogin, onCl
         
         <h2 className="text-3xl font-display font-bold text-center text-gray-900 dark:text-white">
           {isLogin ? `Welcome Back,` : `Create Your Account`}
-          <span className="block text-brand-blue dark:text-brand-yellow">{selectedRole}</span>
+          <span className="block text-[#1E90FF] dark:text-[#FFD700]">{selectedRole}</span>
         </h2>
         
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -35,7 +35,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ initialRole, onLogin, onCl
                 id="role-select"
                 value={selectedRole}
                 onChange={(e) => setSelectedRole(e.target.value as UserRole)}
-                className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-200 rounded-t-lg focus:outline-none focus:ring-brand-blue focus:border-brand-blue focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-200 rounded-t-lg focus:outline-none focus:ring-2 focus:ring-[#1E90FF] focus:border-transparent focus:z-10 sm:text-sm"
               >
                 {Object.values(UserRole).map((role: string) => (
                   <option key={role} value={role}>{role}</option>
@@ -50,7 +50,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ initialRole, onLogin, onCl
                 type="tel"
                 autoComplete="tel"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 placeholder-gray-500 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-brand-blue focus:border-brand-blue focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 placeholder-gray-500 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#1E90FF] focus:border-transparent focus:z-10 sm:text-sm"
                 placeholder="MTN/Airtel Phone Number"
               />
             </div>
@@ -63,7 +63,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ initialRole, onLogin, onCl
                     type="text"
                     autoComplete="name"
                     required
-                    className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 placeholder-gray-500 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-brand-blue focus:border-brand-blue focus:z-10 sm:text-sm"
+                    className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 placeholder-gray-500 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#1E90FF] focus:border-transparent focus:z-10 sm:text-sm"
                     placeholder="Full Name"
                   />
                </div>
@@ -75,7 +75,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ initialRole, onLogin, onCl
                 name="otp"
                 type="text"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 placeholder-gray-500 text-gray-900 dark:text-gray-200 rounded-b-lg focus:outline-none focus:ring-brand-blue focus:border-brand-blue focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 placeholder-gray-500 text-gray-900 dark:text-gray-200 rounded-b-lg focus:outline-none focus:ring-2 focus:ring-[#1E90FF] focus:border-transparent focus:z-10 sm:text-sm"
                 placeholder="OTP Code"
               />
             </div>
@@ -84,7 +84,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ initialRole, onLogin, onCl
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-brand-blue to-brand-green hover:shadow-lg hover:shadow-cyan-500/50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-blue transition-all duration-300"
+              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-full text-white bg-gradient-to-r from-[#1E90FF] to-[#20B2AA] hover:shadow-lg hover:shadow-teal-500/50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1E90FF] transition-all duration-300"
             >
               {isLogin ? 'Login with OTP' : 'Register with OTP'}
             </button>
@@ -94,7 +94,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ initialRole, onLogin, onCl
         <div className="mt-6 text-center">
           <button
             onClick={() => setIsLogin(!isLogin)}
-            className="font-medium text-brand-blue hover:text-brand-green dark:text-brand-yellow dark:hover:text-yellow-300"
+            className="font-medium text-[#1E90FF] hover:text-[#20B2AA] dark:text-[#FFD700] dark:hover:text-yellow-300 transition-colors"
           >
             {isLogin ? 'Need an account? Sign up' : 'Already have an account? Log in'}
           </button>
