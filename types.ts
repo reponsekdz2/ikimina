@@ -70,3 +70,10 @@ export interface Loan {
   totalRepaid: number;
   status: 'Fully Repaid' | 'Settled';
 }
+
+export interface SavingsGoal {
+  id: string;
+  name: string;
+  targetAmount: number;
+  currentAmount: number;
+}

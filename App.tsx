@@ -14,6 +14,7 @@ import { ProfilePage } from './components/pages/ProfilePage';
 import { IkiminaPage } from './components/pages/IkiminaPage';
 import { WalletPage } from './components/pages/WalletPage';
 import { EntrepreneurshipPage } from './components/pages/EntrepreneurshipPage';
+import { Notification } from './components/common/Notification';
 
 
 const App: React.FC = () => {
@@ -23,6 +24,16 @@ const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>(Page.LANDING);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authModalRole, setAuthModalRole] = useState<UserRole>(UserRole.SEEKER);
+  const [notification, setNotification] = useState<{title: string, message: string} | null>(null);
+
+  useEffect(() => {
+    if (notification) {
+      const timer = setTimeout(() => {
+        setNotification(null);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [notification]);
 
   const handleLogin = (role: UserRole) => {
     // Mock login
@@ -51,6 +62,10 @@ const App: React.FC = () => {
     setAuthModalRole(role);
     setIsAuthModalOpen(true);
   };
+  
+  const showNotification = (title: string, message: string) => {
+      setNotification({ title, message });
+  }
 
   const renderPage = () => {
     if (!isAuthenticated || !user) {
@@ -62,11 +77,11 @@ const App: React.FC = () => {
             case Page.DASHBOARD:
                 return <DashboardOverviewPage user={user} />;
             case Page.JOBS:
-                return <JobsPage userRole={user.role} />;
+                return <JobsPage userRole={user.role} showNotification={showNotification} />;
             case Page.IKIMINA:
                 return <IkiminaPage userRole={user.role} />;
             case Page.WALLET:
-                return <WalletPage />;
+                return <WalletPage showNotification={showNotification} />;
             case Page.TRAINING:
                 return <TrainingPage />;
             case Page.ENTREPRENEURSHIP:
@@ -89,7 +104,7 @@ const App: React.FC = () => {
 
   return (
     <div className={`${theme}`}>
-      <div className="bg-[#F5F5F5] dark:bg-gray-900 text-[#333333] dark:text-gray-200 min-h-screen font-sans">
+      <div className="main-app-bg text-text-primary-light dark:text-text-primary-dark min-h-screen font-sans">
         <Header 
           isAuthenticated={isAuthenticated}
           user={user}
@@ -98,11 +113,12 @@ const App: React.FC = () => {
           theme={theme}
           toggleTheme={toggleTheme}
         />
-        <main className={!isAuthenticated ? '' : "pt-20"}>
+        <main>
           {renderPage()}
         </main>
         {!isAuthenticated && <Footer />}
         {isAuthModalOpen && <AuthModal initialRole={authModalRole} onLogin={handleLogin} onClose={() => setIsAuthModalOpen(false)} />}
+        {notification && <Notification title={notification.title} message={notification.message} onClose={() => setNotification(null)} />}
       </div>
     </div>
   );
