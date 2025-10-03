@@ -37,7 +37,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ initialRole, onLogin, onCl
                 onChange={(e) => setSelectedRole(e.target.value as UserRole)}
                 className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-200 rounded-t-lg focus:outline-none focus:ring-brand-blue focus:border-brand-blue focus:z-10 sm:text-sm"
               >
-                {Object.values(UserRole).map(role => (
+                {Object.values(UserRole).map((role: string) => (
                   <option key={role} value={role}>{role}</option>
                 ))}
               </select>

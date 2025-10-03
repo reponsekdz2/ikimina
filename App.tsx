@@ -2,101 +2,97 @@ import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { LandingPage } from './components/LandingPage';
-import { AuthModal } from './components/AuthModal';
 import { DashboardLayout } from './components/DashboardPage';
+import { AuthModal } from './components/AuthModal';
+import { useDarkMode } from './hooks/useDarkMode';
+import { User, Page, UserRole } from './types';
 import { DashboardOverviewPage } from './components/pages/DashboardOverviewPage';
 import { JobsPage } from './components/pages/JobsPage';
 import { TrainingPage } from './components/pages/TrainingPage';
 import { CommunityPage } from './components/pages/CommunityPage';
 import { ProfilePage } from './components/pages/ProfilePage';
 
-import { UserRole, User, Page } from './types';
-import { useDarkMode } from './hooks/useDarkMode';
-
 const App: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState<Page>(Page.LANDING);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [isAuthModalOpen, setAuthModalOpen] = useState<boolean>(false);
-  const [initialRole, setInitialRole] = useState<UserRole>(UserRole.SEEKER);
   const [theme, toggleTheme] = useDarkMode();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [currentPage, setCurrentPage] = useState<Page>(Page.LANDING);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authModalRole, setAuthModalRole] = useState<UserRole>(UserRole.SEEKER);
 
-  useEffect(() => {
-    document.body.classList.add('transition-colors', 'duration-500');
-  }, []);
-
-  const handleRoleSelection = (role: UserRole) => {
-    setInitialRole(role);
-    setAuthModalOpen(true);
-  };
-
-  const handleLogin = (role: UserRole, name?: string) => {
-    const userName = name || (role === UserRole.SEEKER ? 'Aline U.' : 'Kigali Corp');
-    setCurrentUser({ role, name: userName });
+  const handleLogin = (role: UserRole) => {
+    // Mock login
+    const mockUser: User = {
+      id: '1',
+      name: role === UserRole.SEEKER ? 'Gisa Chris' : 'Kigali Corp',
+      role: role,
+    };
+    setUser(mockUser);
     setIsAuthenticated(true);
-    setAuthModalOpen(false);
     setCurrentPage(Page.DASHBOARD);
+    setIsAuthModalOpen(false);
   };
 
   const handleLogout = () => {
+    setUser(null);
     setIsAuthenticated(false);
-    setCurrentUser(null);
     setCurrentPage(Page.LANDING);
   };
 
   const handleNavigation = (page: Page) => {
-    if (!isAuthenticated && page !== Page.LANDING) {
-      setCurrentPage(Page.LANDING);
-    } else {
-      setCurrentPage(page);
-    }
+    setCurrentPage(page);
   };
 
-  const renderAuthenticatedPage = () => {
-    if (!currentUser) return <LandingPage onSelectRole={handleRoleSelection} />;
-    
-    let pageContent;
-    switch (currentPage) {
-        case Page.JOBS:
-            pageContent = <JobsPage userRole={currentUser.role} />;
-            break;
-        case Page.TRAINING:
-            pageContent = <TrainingPage />;
-            break;
-        case Page.COMMUNITY:
-            pageContent = <CommunityPage />;
-            break;
-        case Page.PROFILE:
-            pageContent = <ProfilePage />;
-            break;
-        case Page.DASHBOARD:
-        default:
-            pageContent = <DashboardOverviewPage user={currentUser} />;
+  const openAuthModal = (role: UserRole) => {
+    setAuthModalRole(role);
+    setIsAuthModalOpen(true);
+  };
+
+  const renderPage = () => {
+    if (!isAuthenticated || !user) {
+      return <LandingPage onAuth={openAuthModal} />;
+    }
+
+    const pageContent = () => {
+        switch(currentPage) {
+            case Page.DASHBOARD:
+                return <DashboardOverviewPage user={user} />;
+            case Page.JOBS:
+                return <JobsPage />;
+            case Page.TRAINING:
+                return <TrainingPage />;
+            case Page.COMMUNITY:
+                return <CommunityPage />;
+            case Page.PROFILE:
+                return <ProfilePage user={user} />;
+            default:
+                return <DashboardOverviewPage user={user} />;
+        }
     }
 
     return (
-      <DashboardLayout user={currentUser} activePage={currentPage} onNavigate={handleNavigation}>
-        {pageContent}
-      </DashboardLayout>
-    );
+        <DashboardLayout user={user} activePage={currentPage} onNavigate={handleNavigation}>
+            {pageContent()}
+        </DashboardLayout>
+    )
   };
 
   return (
-    <div className={`font-sans text-gray-800 dark:text-gray-200 ${theme}`}>
-      <div className="bg-white dark:bg-gray-900">
+    <div className={`${theme}`}>
+      <div className="bg-gray-50 dark:bg-gray-900/80 text-gray-900 dark:text-gray-100 min-h-screen font-sans">
         <Header 
-            isAuthenticated={isAuthenticated}
-            user={currentUser}
-            onNavigate={handleNavigation}
-            onLogout={handleLogout}
-            theme={theme}
-            toggleTheme={toggleTheme}
+          isAuthenticated={isAuthenticated}
+          user={user}
+          onNavigate={handleNavigation}
+          onLogout={handleLogout}
+          theme={theme}
+          toggleTheme={toggleTheme}
         />
-        <main className="min-h-screen">
-          {isAuthenticated ? renderAuthenticatedPage() : <LandingPage onSelectRole={handleRoleSelection} />}
+        <main className="pt-20">
+          {renderPage()}
         </main>
-        {isAuthModalOpen && <AuthModal initialRole={initialRole} onLogin={handleLogin} onClose={() => setAuthModalOpen(false)}/>}
         {!isAuthenticated && <Footer />}
+        {isAuthModalOpen && <AuthModal initialRole={authModalRole} onLogin={handleLogin} onClose={() => setIsAuthModalOpen(false)} />}
       </div>
     </div>
   );

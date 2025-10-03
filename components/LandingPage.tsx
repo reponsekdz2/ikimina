@@ -1,93 +1,47 @@
 import React from 'react';
 import { UserRole } from '../types';
-import { BuildingIcon, UserIcon } from './IconComponents';
 
 interface LandingPageProps {
-  onSelectRole: (role: UserRole) => void;
+  onAuth: (role: UserRole) => void;
 }
 
-interface RoleCardProps {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  ctaText: string;
-  onClick: () => void;
-  glowColor: string;
-}
-
-const RoleCard: React.FC<RoleCardProps> = ({ icon, title, description, ctaText, onClick, glowColor }) => (
-  <div 
-    style={{ transformStyle: 'preserve-3d' }}
-    className="group relative p-8 md:p-12 rounded-3xl bg-white/30 dark:bg-gray-800/30 backdrop-blur-2xl border border-gray-200/50 dark:border-gray-700/50 shadow-xl cursor-pointer transition-all duration-500 ease-in-out hover:shadow-2xl hover:-translate-y-2 hover:scale-105"
-    onClick={onClick}
-  >
-    <div className={`absolute -inset-1 rounded-3xl bg-gradient-to-br from-brand-blue to-brand-green opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl ${glowColor}`}></div>
-    <div className="relative flex flex-col items-center text-center" style={{ transform: 'translateZ(50px)' }}>
-      <div className="flex items-center justify-center w-24 h-24 rounded-full bg-white/50 dark:bg-gray-900/50 mb-6 group-hover:scale-110 transition-transform duration-300 border-2 border-white/50">
-        {icon}
-      </div>
-      <h3 className="text-3xl font-display font-bold text-gray-900 dark:text-white">{title}</h3>
-      <p className="mt-4 text-lg text-gray-700 dark:text-gray-300 h-24">{description}</p>
-      <div className="h-16 mt-6 flex items-center">
-        <button className="py-3 px-8 font-semibold text-white bg-gradient-to-r from-brand-blue to-brand-green rounded-xl transition-all duration-300 scale-0 group-hover:scale-100 opacity-0 group-hover:opacity-100">
-          {ctaText}
+const RoleCard: React.FC<{ role: UserRole; title: string; description: string; onSelect: () => void; }> = ({ role, title, description, onSelect }) => (
+    <div className="p-8 rounded-2xl bg-white/30 dark:bg-gray-800/30 backdrop-blur-lg border border-gray-200 dark:border-gray-700 text-center transform hover:-translate-y-2 transition-transform duration-300">
+        <h3 className="text-2xl font-bold font-display text-gray-900 dark:text-white">{title}</h3>
+        <p className="mt-2 text-gray-600 dark:text-gray-300">{description}</p>
+        <button onClick={onSelect} className="mt-6 px-8 py-3 font-semibold text-white bg-gradient-to-r from-brand-blue to-brand-green rounded-lg shadow-lg hover:shadow-cyan-500/50 transition-all duration-300">
+            Get Started
         </button>
-      </div>
     </div>
-  </div>
 );
 
-export const LandingPage: React.FC<LandingPageProps> = ({ onSelectRole }) => {
-  const words = ["Jobs.", "Savings.", "Skills.", "Rwanda."];
-  const [currentWord, setCurrentWord] = React.useState(words[0]);
-  const [animationKey, setAnimationKey] = React.useState(0);
 
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentWord(prevWord => {
-        const nextIndex = (words.indexOf(prevWord) + 1) % words.length;
-        setAnimationKey(prevKey => prevKey + 1);
-        return words[nextIndex];
-      });
-    }, 2000);
-    return () => clearInterval(interval);
-  }, []);
-
-
+export const LandingPage: React.FC<LandingPageProps> = ({ onAuth }) => {
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-4 relative overflow-hidden">
-      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-100 via-green-100 to-yellow-100 dark:from-blue-900/30 dark:via-green-900/30 dark:to-yellow-900/30"></div>
-      
-      <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-7xl font-display font-extrabold text-gray-900 dark:text-white leading-tight">
-            Find <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-green">
-                <span key={animationKey} className="inline-block animate-fade-in-up">{currentWord}</span>
-            </span> Empower Rwanda.
-          </h1>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-300">
-            Whether you're seeking opportunities or creating them, your journey starts here.
-          </p>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-20">
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+        <h1 className="text-5xl md:text-7xl font-bold font-display text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-green">
+          Unlock Your Potential.
+        </h1>
+        <p className="mt-4 text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          KaziConnect is your all-in-one platform for jobs, skills training, and financial empowerment in Rwanda.
+        </p>
+
+        <div className="mt-16 max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+            <RoleCard 
+                role={UserRole.SEEKER} 
+                title="I'm a Job Seeker"
+                description="Find jobs that match your skills, get training, and access financial tools to build your future."
+                onSelect={() => onAuth(UserRole.SEEKER)}
+            />
+            <RoleCard 
+                role={UserRole.EMPLOYER} 
+                title="I'm an Employer"
+                description="Discover talented and motivated individuals to grow your business. Post jobs and manage candidates with ease."
+                onSelect={() => onAuth(UserRole.EMPLOYER)}
+            />
         </div>
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-16 max-w-5xl mx-auto">
-          <RoleCard
-            icon={<UserIcon className="w-12 h-12 text-brand-blue" />}
-            title="Job Seeker"
-            description="Find Jobs, Join Savings Groups, Learn Skills."
-            ctaText="Join as Seeker"
-            onClick={() => onSelectRole(UserRole.SEEKER)}
-            glowColor="shadow-glow-blue"
-          />
-          <RoleCard
-            icon={<BuildingIcon className="w-12 h-12 text-brand-green" />}
-            title="Employer"
-            description="Post Jobs, Create Savings Groups, Empower Others."
-            ctaText="Join as Employer"
-            onClick={() => onSelectRole(UserRole.EMPLOYER)}
-            glowColor="shadow-glow-green"
-          />
-        </div>
-      </div>
+      </main>
     </div>
   );
 };

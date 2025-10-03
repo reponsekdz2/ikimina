@@ -1,60 +1,24 @@
 export enum UserRole {
   SEEKER = 'Job Seeker',
   EMPLOYER = 'Employer',
+  TRAINER = 'Trainer',
+  FINANCIAL_PARTNER = 'Financial Partner',
 }
 
 export interface User {
-  role: UserRole;
+  id: string;
   name: string;
+  role: UserRole;
+  avatarUrl?: string;
 }
 
 export enum Page {
-  LANDING,
-  DASHBOARD,
-  JOBS,
-  TRAINING,
-  COMMUNITY,
-  PROFILE,
-}
-
-export enum IkiminaCategory {
-    BUSINESS = 'Business',
-    YOUTH = 'Youth',
-    PERSONAL = 'Personal',
-    AGRICULTURE = 'Agriculture'
-}
-
-export interface Member {
-    id: number;
-    name: string;
-    avatarUrl: string;
-}
-
-export interface Ikimina {
-    id: number;
-    name: string;
-    category: IkiminaCategory;
-    target: number;
-    progress: number;
-    members: Member[];
-    frequency: 'weekly' | 'monthly';
-}
-
-export interface Job {
-    id: number;
-    title: string;
-    company: string;
-    salary: string;
-    deadline: string;
-    bookmarked: boolean;
-}
-
-export interface Course {
-    id: number;
-    title: string;
-    instructor: string;
-    duration: string;
-    imageUrl: string;
+  LANDING = 'LANDING',
+  DASHBOARD = 'DASHBOARD',
+  JOBS = 'JOBS',
+  TRAINING = 'TRAINING',
+  COMMUNITY = 'COMMUNITY',
+  PROFILE = 'PROFILE',
 }
 
 export interface CommunityPost {
@@ -66,36 +30,22 @@ export interface CommunityPost {
     comments: number;
 }
 
-export interface Badge {
-    id: number;
-    name: string;
-    description: string;
-    unlocked: boolean;
-    icon: React.ReactElement;
+export interface Job {
+  id: string;
+  title: string;
+  company: string;
+  location: string;
+  type: 'Full-time' | 'Part-time' | 'Contract';
+  salary: string;
+  description: string;
+  postedDate: string;
 }
 
-// CV Builder Types
-export interface WorkExperience {
-    id: string;
-    jobTitle: string;
-    company: string;
-    years: string;
-    description: string;
-}
-
-export interface Education {
-    id: string;
-    degree: string;
-    institution: string;
-    year: string;
-}
-
-export interface Skill {
-    id: string;
-    name: string;
-}
-
-export type CVSection = {
-    id: 'workExperience' | 'education' | 'skills' | 'portfolio';
-    title: string;
+export interface TrainingModule {
+  id: string;
+  title: string;
+  provider: string;
+  duration: string;
+  description: string;
+  isCompleted: boolean;
 }
